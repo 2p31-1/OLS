@@ -7,7 +7,15 @@
         <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
     </head>
     <body>
-        <h1 id="hello">Online Lyrics Syncer</h1>
+        <h1 id="title">Online Lyrics Syncer</h1>
+        <div id="desc">
+            <h6>Instructions:</h6>
+            <ol>Drop an audio file below</ol>
+            <ol>Paste or type lyrics or lrc file on textarea.</ol>
+            <ol>press toArray button</ol>
+            <ul>"S" key to mark time on selected lyric.</ul>
+            <ul>Use Arrow keys to move your lyrics/music cursor.</ul>
+        </div>
         <div id="application">
             <input type="file" id="audio"/>
             <audio id="player" controls></audio>
@@ -16,76 +24,7 @@
             </div>
             <div id="lyricsWindow">
                 <button onclick="">X</button>
-                <textarea id="lyricsTextarea">
-[length: 04:37.244] ⠀
-[ti: ミはμ'sicのミ] ⠀
-[al: ミはμ'sicのミ] ⠀
-[ar: μ's] ⠀
-[00:01.000] [Intro] ⠀
-[00:01.944] μ'sic forever！
-[00:04.984] 忘れないで　君と僕の足跡
-[00:14.370] [Verse 1] ⠀
-[00:26.455] 信じるちからでここまで来たよ
-[00:32.967] 見つめるミライはきっと同じだったね
-[00:39.144] 宝物だよ　積み重ねた時間
-[00:45.384] ありがとうって言いたいな　心のfriend！
-
-[00:51.137] (μ'sic)ずっと前から
-[00:53.947] この出会いは奇跡　知っていたんだ
-[00:57.369] (μ'sic)みんなの気持ち
-[01:00.507] つながればきっと終わらない　まだまだ楽しいコトしよう
-
-[01:09.171] [Chrous] ⠀
-[01:09.172] La-La μ'sical night！
-[01:11.277] 踊れドレミファ　そんなふうに喜びが伝わって
-[01:17.480] 僕らは笑顔でひとつになる
-[01:21.833] La-La μ'sical night！
-[01:23.712] 踊れドレ　時よお願い今夜を永遠に刻みたいんだよ
-[01:32.608] ああ…君はどうだい？
-
-[01:34.903] [Verse 2] ⠀
-[01:47.277] 広がる世界に驚きながら
-[01:53.323] 手を取りあって進もうと走り続けた
-[01:59.450] 刺激的だよ　これからの日々も
-[02:05.788] よろしくねって言いたいな　君だよ…friend！！
-
-[02:11.510] (μ'sic)だんだん強く
-[02:14.365] この出会いの奇跡　感じてたんだ
-[02:17.670] (μ'sic)みんなの気持ち
-[02:21.031] つながればきっと終わらない　ほらほら楽しいユメ見よう
-
-[02:29.627] [Chrous] ⠀
-[02:29.628] La-La μ'sical sign！
-[02:31.742] ウタ歌え　光のパワー浴びながら
-[02:36.268] 思い出をみんなと笑顔で抱きしめたい
-[02:42.179] La-La μ'sical sign！
-[02:44.125] ウタ歌え　君にお願い大声で呼んでくれる？　遊びたいんだよ
-[02:53.158] ああ…いまがすべて！
-
-[02:55.634] [Interlude] ⠀
-[02:55.635] μ'sic forever！
-[02:58.393] 忘れないで　君と僕の足跡を
-
-[03:07.714] [Pre-Chrous] ⠀
-[03:25.616] La-La μ'sical night！
-[03:27.432] 踊れドレ　喜びでみんなはつながってるんだ
-[03:33.419] 言いたいな　ありがとう…yeah！
-[03:38.022] La-La μ'sical night！
-[03:39.904] 踊れドレ　誰にお願いしようか？
-[03:44.216] 時よとまれ(時よとまれ)シアワセなんだ笑顔で僕らは
-
-[03:53.085] [Last Chrous] ⠀
-[03:53.086] La-La μ'sical sign！
-[03:55.326] ウタ歌え　光のパワー浴びながら
-[04:00.146] 思い出をみんなと笑顔で抱きしめたい
-[04:05.826] La-La μ'sical sign！
-[04:07.804] ウタ歌え　君にお願い大声で呼んでくれる？　遊びたいんだよ
-[04:16.634] ああ…いまがすべて！
-
-[04:19.026] [Outro] ⠀
-[04:19.027] μ'sic forever！
-[04:22.029] 忘れないで　君と僕の足跡
-[04:31.187] ⠀</textarea>
+                <textarea id="lyricsTextarea"></textarea>
             </div>
             <button onclick="toArray()">toArray</button>
             <button onclick="toText()">toText</button>
