@@ -7,6 +7,7 @@ let lyricsInfo = [];
 let music;
 let isControllable = true;
 let selected = 0;
+let synced = 0;
 
 function refreshList(target) {
     if (lyricsArray[target][0] === null) {
@@ -119,6 +120,27 @@ audioSelector.addEventListener("change", (event) => { //Making uploaded music pl
     musicPlayer.src = music;
 })
 
+musicPlayer.addEventListener("timeupdate", (event) => { //Music synced lyrics
+    let t = musicPlayer.currentTime;
+    let n = null;
+    let nt = null;
+    for (let i = 0; i < lyricsArray.length; i++) {
+        if (lyricsArray[i][0] < t) {
+            //TODO: 여기서부터
+        }
+    }
+    if (next !== null) changeSynced(next);
+})
+
+function changeSynced(target) {
+    if (target >= lyricsArray.length || target < 0) return;
+    try {
+        document.querySelector("#lyricsSync li:nth-child(" + (synced + 1) + ")").setAttribute("class", "");
+    } catch { } //To prevent errors from removed previous selected list
+    document.querySelector("#lyricsSync li:nth-child(" + (target + 1) + ")").setAttribute("class", "synced");
+    synced = target;
+}
+
 document.addEventListener("keydown", (event) => { //Keyboard event listener
     if (isControllable) {
         console.log(event.code);
@@ -142,7 +164,12 @@ document.addEventListener("keydown", (event) => { //Keyboard event listener
             case "ArrowRight":
                 changeTimeCursor(musicPlayer.currentTime + 1);
                 break;
-
+            case "KeyF":
+                if (musicPlayer.paused) {
+                    musicPlayer.play();
+                } else {
+                    musicPlayer.pause();
+                }
         }
     }
 });
