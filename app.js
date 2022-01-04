@@ -9,6 +9,16 @@ let isControllable = true;
 let selected = 0;
 let synced = 0;
 
+function needSpace(str) {
+    let x = false;
+    try {
+        if (str[0] !== ' ') x = true;
+    } catch {
+
+    }
+    return x ? " " : "";
+}
+
 function refreshList(target) {
     if (lyricsArray[target][0] === null) {
         musicSyncer.children[target].innerText = lyric[1];
@@ -18,7 +28,8 @@ function refreshList(target) {
         s = s % 60;
         let p = parseInt((lyricsArray[target][0] % 1) * 1000);
         musicSyncer.children[target].innerText = "[" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s + "." +
-            (p < 100 ? "0" : "") + (p < 10 ? "0" : "") + p + "]" + lyricsArray[target][1];
+            (p < 100 ? "0" : "") + (p < 10 ? "0" : "") + p + "]" + needSpace(lyricsArray[target][1]) + lyricsArray[target][1];
+        musicSyncer.children[target].setAttribute("ondblclick", "changeTimeCursor(" + lyricsArray[target][0] + ")");
     }
 }
 
@@ -34,7 +45,7 @@ function reWriteList() {
             s = s % 60;
             let p = parseInt((lyricsArray[i][0] % 1) * 1000);
             mark.appendChild(document.createTextNode("[" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s + "." +
-                (p < 100 ? "0" : "") + (p < 10 ? "0" : "") + p + "]" + lyricsArray[i][1]));
+                (p < 100 ? "0" : "") + (p < 10 ? "0" : "") + p + "]" + needSpace(lyricsArray[i][1]) + lyricsArray[i][1]));
             mark.setAttribute("ondblclick", "changeTimeCursor(" + lyricsArray[i][0] + ")");
         }
         mark.setAttribute("onclick", "changeCursor(" + i + ")");
@@ -92,7 +103,7 @@ function toText() {
             s = s % 60;
             let p = parseInt((lyricsArray[i][0] % 1) * 1000);
             textarea.value += ("[" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s + "." +
-                (p < 100 ? "0" : "") + (p < 10 ? "0" : "") + p + "]" + lyricsArray[i][1] + (i === lyricsArray.length - 1 ? "" : "\n"));
+                (p < 100 ? "0" : "") + (p < 10 ? "0" : "") + p + "]" + needSpace(lyricsArray[i][1]) + lyricsArray[i][1] + (i === lyricsArray.length - 1 ? "" : "\n"));
         }
     }
 }
