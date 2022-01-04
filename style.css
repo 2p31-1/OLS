@@ -16,6 +16,9 @@
     list-style-position: inside;
     padding : 10px;
 }
+    .synced{
+        background-color:yellow;
+    }
     #selected{
         background-color: aqua;
     }
