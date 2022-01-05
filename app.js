@@ -138,6 +138,16 @@ function changeTimeCursor(second) {
 
 audioSelector.addEventListener("change", (event) => { //Making uploaded music playable
     let format = event.target.value.substring(event.target.value.lastIndexOf('.') + 1, event.target.value.length).toLowerCase();
+    let setFilename = function (filePath) {
+        let result = filePath.split("/");
+        result = result[result.length - 1].split("\\");
+        let dotidx = result[result.length - 1].lastIndexOf('.');
+        console.log(result, dotidx);
+        if (dotidx > 0) {
+            result[result.length - 1] = result[result.length - 1].substring(0, dotidx);
+        }
+        fileName = result[result.length - 1] + ".lrc";
+    }
     switch (format) {
         case "lrc":
         case "txt":
@@ -146,19 +156,13 @@ audioSelector.addEventListener("change", (event) => { //Making uploaded music pl
                 lyricsText.value = textReader.result;
                 toArray();
             }
-            const filePath = event.target.value;
-            let result = filePath.split("/");
-            result = result[result.length - 1].split("\\");
-            fileName = result[result.length - 1] + ".lrc";
+            setFilename(event.target.value);
             break;
         default:
             music = new Audio(URL.createObjectURL(event.target.files[0])).src;
             musicPlayer.src = music;
             if (fileName === "") {
-                const filePath = event.target.value;
-                let result = filePath.split("/");
-                result = result[result.length - 1].split("\\");
-                fileName = result[result.length - 1] + ".lrc";
+                setFilename(event.target.value);
             }
             break;
     }
@@ -166,7 +170,7 @@ audioSelector.addEventListener("change", (event) => { //Making uploaded music pl
 
 function downloadFile() {
     let element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(lyricstext.value));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(lyricsText.value));
     element.setAttribute('download', fileName);
     document.body.appendChild(element);
     element.click();
