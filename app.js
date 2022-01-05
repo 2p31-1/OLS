@@ -154,6 +154,12 @@ audioSelector.addEventListener("change", (event) => { //Making uploaded music pl
         default:
             music = new Audio(URL.createObjectURL(event.target.files[0])).src;
             musicPlayer.src = music;
+            if (fileName === "") {
+                const filePath = event.target.value;
+                let result = filePath.split("/");
+                result = result[result.length - 1].split("\\");
+                fileName = result[result.length - 1] + ".lrc";
+            }
             break;
     }
 })
