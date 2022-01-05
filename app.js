@@ -113,7 +113,7 @@ function toText() {
             s = s % 60;
             let p = parseInt((lyricsArray[i][0] % 1) * 1000);
             textarea.value += ("[" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s + "." +
-                (p < 100 ? "0" : "") + (p < 10 ? "0" : "") + p + "]" + needSpace(lyricsArray[i][1]) + lyricsArray[i][1] + (i === lyricsArray.length - 1 ? "" : "\n"));
+                (p < 100 ? "0" : "") + (p < 10 ? "0" : "") + p + "]" + needSpace(lyricsArray[i][1]) + (lyricsArray[i][1] === " " ? "⠀" : lyricsArray[i][1]) + (i === lyricsArray.length - 1 ? "" : "\n"));
         }
     }
 }
