@@ -2,12 +2,14 @@ const audioSelector = document.querySelector("#audio");
 const musicPlayer = document.querySelector("#player");
 const musicSyncer = document.querySelector("#lyricsSync");
 const lyricsText = document.querySelector("#lyricsTextarea");
+const textReader = new FileReader();
 let lyricsArray = [];
 let lyricsInfo = [];
 let music;
 let isControllable = true;
 let selected = 0;
 let synced = 0;
+let fileName = "";
 
 function needSpace(str) {
     let x = false;
@@ -86,6 +88,14 @@ function toArray() { //LRC file to lyricsArray
         }
     }
     reWriteList();
+
+    if (fileName === "") {
+        lyricsInfo.forEach(e => {
+            if (e[0] === "ti") {
+                fileName = e[1] + ".lrc";
+            }
+        });
+    }
 }
 
 function toText() {
@@ -127,9 +137,34 @@ function changeTimeCursor(second) {
 }
 
 audioSelector.addEventListener("change", (event) => { //Making uploaded music playable
-    music = new Audio(URL.createObjectURL(event.target.files[0])).src;
-    musicPlayer.src = music;
+    let format = event.target.value.substring(event.target.value.lastIndexOf('.') + 1, event.target.value.length).toLowerCase();
+    switch (format) {
+        case "lrc":
+        case "txt":
+            textReader.readAsText(event.target.files[0]);
+            textReader.onload = () => {
+                lyricsText.value = textReader.result;
+                toArray();
+            }
+            const filePath = event.target.value;
+            let result = filePath.split("/");
+            result = result[result.length - 1].split("\\");
+            fileName = result[result.length - 1] + ".lrc";
+            break;
+        default:
+            music = new Audio(URL.createObjectURL(event.target.files[0])).src;
+            musicPlayer.src = music;
+            break;
+    }
 })
+
+function downloadFile() {
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(lyricstext.value));
+    element.setAttribute('download', fileName);
+    document.body.appendChild(element);
+    element.click();
+}
 
 musicPlayer.addEventListener("timeupdate", (event) => { //Music synced lyrics
     let t = musicPlayer.currentTime;
